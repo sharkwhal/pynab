@@ -379,7 +379,9 @@ class Budget:
             dict: A dictionary containing the budget's categories.
         """
         if len(self._categories) == 0:
-            self._categories = self.pynab.api.get_budget(budget=self).categories
+            for category_group in self.category_groups.values():
+                for id, category in category_group.categories.items():
+                    self._categories[id] = category
         return self._categories
 
     @property
