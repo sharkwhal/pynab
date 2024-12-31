@@ -4,6 +4,8 @@ from pynab import Pynab
 from pynab import enums
 import pytest
 import logging
+from dotenv import dotenv_values
+
 
 TEST_BUDGET_NAME = "test_budget"
 TEST_ACCOUNT_NAME = "test_account"
@@ -15,8 +17,9 @@ TEST_TRANSACTION_NAME = "test_transaction"
 TEST_SCHEDULED_TRANSACTION_NAME = "test_scheduled_transaction"
 TEST_PAYEE_CHANGED_NAME = "test_payee_changed"
 
-# Enter API bearer token here
-BEARER = "YOUR_BEARER_TOKEN_HERE"
+# get API bearer token from .env
+secrets = dotenv_values("testing/.env")
+BEARER = secrets["API_KEY"]
 
 
 @pytest.fixture(scope="module")
