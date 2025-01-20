@@ -469,7 +469,7 @@ class Api:
         month_id: str = "current",
         category: schemas.Category = None,
         category_id: str = None,
-        request_body: str = None,
+        budgeted: int = 0,
     ):
         """
         Update the budgeted amount for a category in a specific month.
@@ -481,7 +481,7 @@ class Api:
             month_id (str, optional): The ID of the month. Defaults to "current".
             category (schemas.Category, optional): The category object. Defaults to None.
             category_id (str, optional): The ID of the category. Defaults to None.
-            request_body (str, optional): The request body. Defaults to None.
+            budgeted (int, optional): The new value for the amount assigned to this category
 
         Returns:
             schemas.Category: The updated category object.
@@ -493,7 +493,7 @@ class Api:
         month_id = month.month if month else month_id
         category_id = category.id if category else category_id
 
-        request_body = {"category": {"budgeted": 0}}
+        request_body = {"category": {"budgeted": budgeted}}
         response = self.endpoints.request_update_category_for_month(
             budget_id=budget_id,
             month_id=month_id,
