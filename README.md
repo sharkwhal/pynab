@@ -135,8 +135,13 @@ Follow these steps to manually create a test budget:
 
 ### Running Tests with Tox
 
-Before running tests, update `tests/test_live_api.py` with your API Bearer Token.
+Before running tests, create a `tests/.env` file with your API Bearer Token using the following format:
+```sh
+# ynab personal access token
+API_KEY=your_API_token_goes_here
+```
 
+To run tests:
 ```sh
 python -m venv .venv-test
 source .venv-test/bin/activate
