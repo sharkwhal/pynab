@@ -27,6 +27,15 @@ class User:
 
         self.id: str = self._json.get("id", "")
 
+    def __repr__(self):
+        """
+        Returns a string representation of the object.
+
+        Returns:
+            str: A string representation of the object.
+        """
+        return f"{self.__class__.__name__}(id={self.id})"
+
     def to_dict(self):
         """
         Converts the object to a dictionary.
@@ -180,6 +189,24 @@ class Budget:
             self.scheduled_subtransactions = self._json.get(
                 "scheduled_subtransactions", {}
             )
+
+    def __str__(self):
+        """
+        Returns a string summary of the object.
+
+        Returns:
+            str: A string summary of the object.
+        """
+        return self.name
+
+    def __repr__(self):
+        """
+        Returns a string representation of the object.
+
+        Returns:
+            str: A string representation of the object.
+        """
+        return f"{self.__class__.__name__}(name={self.name})"
 
     @property
     def accounts(self):
@@ -665,6 +692,14 @@ class DateFormat:
 
         self.format: str = self._json.get("format", "")
 
+    def __repr__(self):
+        """
+        Returns a string representation of the object.
+
+        Returns:
+            str: A string representation of the object.
+        """
+        return f"{self.__class__.__name__}(format={self.format})"
 
 class CurrencyFormat:
     def __init__(self, pynab=None, budget: Budget = None, _json: str = None):
@@ -702,6 +737,14 @@ class CurrencyFormat:
         self.currency_symbol: str = self._json.get("currency_symbol", "")
         self.display_symbol: bool = self._json.get("display_symbol", False)
 
+    def __repr__(self):
+        """
+        Returns a string representation of the object.
+
+        Returns:
+            str: A string representation of the object.
+        """
+        return f"{self.__class__.__name__}(iso_code={self.iso_code})"
 
 class Account:
     def __init__(self, pynab=None, budget: Budget = None, _json: str = None):
@@ -773,6 +816,24 @@ class Account:
         )
         self.deleted: bool = self._json.get("deleted", False)
 
+    def __str__(self):
+        """
+        Returns a string summary of the object.
+
+        Returns:
+            str: A string summary of the object.
+        """
+        return self.name
+
+    def __repr__(self):
+        """
+        Returns a string representation of the object.
+
+        Returns:
+            str: A string representation of the object.
+        """
+        return f"{self.__class__.__name__}(name={self.name}, type={self.type})"
+    
     @property
     def transfer_payees(self):
         """
@@ -955,6 +1016,24 @@ class Payee:
         self.transfer_account_id: str = self._json.get("transfer_account_id", "")
         self.deleted: bool = self._json.get("deleted", False)
 
+    def __str__(self):
+        """
+        Returns a string summary of the object.
+
+        Returns:
+            str: A string summary of the object.
+        """
+        return self.name
+
+    def __repr__(self):
+        """
+        Returns a string representation of the object.
+
+        Returns:
+            str: A string representation of the object.
+        """
+        return f"{self.__class__.__name__}(name={self.name})"
+
     @property
     def transfer_account(self):
         """
@@ -1051,6 +1130,15 @@ class PayeeLocation:
         self.longitude: str = self._json.get("longitude", "")
         self.deleted: bool = self._json.get("deleted", False)
 
+    def __repr__(self):
+        """
+        Returns a string representation of the object.
+
+        Returns:
+            str: A string representation of the object.
+        """
+        return f"{self.__class__.__name__}(lat={self.latitude}, long={self.longitude})"
+
     @property
     def payee(self):
         """
@@ -1092,6 +1180,23 @@ class CategoryGroup:
             category = Category(pynab=self.pynab, _json=category_json)
             self.categories[category.id] = category
 
+    def __str__(self):
+        """
+        Returns a string summary of the object.
+
+        Returns:
+            str: A string summary of the object.
+        """
+        return self.name
+
+    def __repr__(self):
+        """
+        Returns a string representation of the object.
+
+        Returns:
+            str: A string representation of the object.
+        """
+        return f"{self.__class__.__name__}(name={self.name})"
 
 class Category:
     def __init__(self, pynab=None, budget: Budget = None, _json: str = None):
@@ -1170,6 +1275,24 @@ class Category:
         self.goal_overall_left: int = self._json.get("goal_overall_left", 0)
         self.deleted: bool = self._json.get("deleted", False)
 
+    def __str__(self):
+        """
+        Returns a string summary of the object.
+
+        Returns:
+            str: A string summary of the object.
+        """
+        return self.name
+
+    def __repr__(self):
+        """
+        Returns a string representation of the object.
+
+        Returns:
+            str: A string representation of the object.
+        """
+        return f"{self.__class__.__name__}(name={self.name})"
+    
     @property
     def category_group(self):
         """
@@ -1279,6 +1402,23 @@ class Month:
             category = Category(pynab=self.pynab, _json=category_json)
             self.categories[category.id] = category
 
+    def __str__(self):
+        """
+        Returns a string summary of the object.
+
+        Returns:
+            str: A string summary of the object.
+        """
+        return self.month
+
+    def __repr__(self):
+        """
+        Returns a string representation of the object.
+
+        Returns:
+            str: A string representation of the object.
+        """
+        return f"{self.__class__.__name__}(month={self.month})"
 
 class Transaction:
     def __init__(self, pynab=None, budget: Budget = None, _json: dict = None):
@@ -1357,6 +1497,15 @@ class Transaction:
             self.subtransactions[subtransaction["id"]] = SubTransaction(
                 pynab=self.pynab, _json=subtransaction
             )
+
+    def __repr__(self):
+        """
+        Returns a string representation of the object.
+
+        Returns:
+            str: A string representation of the object.
+        """
+        return f"{self.__class__.__name__}(payee={self.payee_name}, category={self.category_name}, date={self.date}, amount={self.amount}, memo={self.memo})"
 
     def to_dict(self):
         """
@@ -1506,6 +1655,15 @@ class SubTransaction:
         )
         self.deleted: str = self._json.get("deleted", False)
 
+    def __repr__(self):
+        """
+        Returns a string representation of the object.
+
+        Returns:
+            str: A string representation of the object.
+        """
+        return f"{self.__class__.__name__}(payee={self.payee_name}, category={self.category_name}, amount={self.amount}, memo={self.memo})"
+
     def transaction(self):
         """
         Returns the transaction associated with the current transaction_id.
@@ -1617,6 +1775,15 @@ class ScheduledTransaction:
             )
         self.deleted: bool = self._json.get("deleted", False)
 
+    def __repr__(self):
+        """
+        Returns a string representation of the object.
+
+        Returns:
+            str: A string representation of the object.
+        """
+        return f"{self.__class__.__name__}(payee={self.payee.name}, category={self.category.name}, date_next={self.date_next}, amount={self.amount}, memo={self.memo})"
+    
     def to_dict(self):
         """
         Converts the object to a dictionary representation.
@@ -1727,6 +1894,15 @@ class ScheduledSubTransaction:
         self.category_id: str = self._json.get("category_id", "")
         self.transfer_account_id: str = self._json.get("transfer_account_id", "")
         self.deleted: bool = self._json.get("deleted", False)
+
+    def __repr__(self):
+        """
+        Returns a string representation of the object.
+
+        Returns:
+            str: A string representation of the object.
+        """
+        return f"{self.__class__.__name__}(payee={self.payee.name}, category={self.category.name}, amount={self.amount}, memo={self.memo})"
 
     @property
     def scheduled_transaction(self):
